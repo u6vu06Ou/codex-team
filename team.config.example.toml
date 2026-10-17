@@ -1,0 +1,31 @@
+# team.config.toml — copy to team.config.toml next to bridge.py and edit,
+# or point at it with --config / CODEX_TEAM_CONFIG.
+
+[bridge]
+# Where worker state (a dedicated CODEX_HOME per session) lives.
+state_home = "~/.codex-team"
+
+# Codex CLI command or full path. Default: `codex` found on PATH.
+# codex_cli = "codex"
+
+# Standing instructions every worker thread starts with. Keep them narrow:
+# workers are persistent, so anything here rides along on every turn.
+# worker_instructions = "You are a persistent teammate. ..."
+
+[provider]
+# Any OpenAI-compatible endpoint you already run or pay for: a local
+# server, a self-hosted gateway, or a hosted provider's base URL.
+base_url = "http://localhost:11434/v1"
+
+# Codex wire API for this provider: "responses" or "chat".
+wire_api = "responses"
+
+# If the endpoint needs a token, name the ENVIRONMENT VARIABLE holding it —
+# never paste the token here. Omit this line for endpoints without auth.
+# bearer_token_env = "MY_PROVIDER_API_KEY"
+
+[models]
+# alias = exact model name the endpoint expects. Aliases are what the lead
+# passes to team_start; keep them short.
+fast = "qwen2.5:14b"
+thinker = "deepseek-chat"

@@ -1,0 +1,29 @@
+# Lead-side Codex config: merge this into your ~/.codex/config.toml
+# (adjust paths), then start Codex with `codex --profile team` or just
+# run codex normally if this is your main config.
+
+model = "gpt-5.1-codex"
+model_provider = "openai"
+
+developer_instructions = """
+You are the lead of a mixed team. Coordinate the persistent named teammates
+through the codex_team MCP tools: team_start, team_send, team_status,
+team_cancel. Start each teammate on a narrow task and keep the same named
+worker for follow-ups (team_send steers a running turn or continues its
+preserved thread). team_cancel interrupts only the chosen worker; others
+continue. The bridge returns a local dashboard URL where the human can watch
+and directly message each worker — show that link when the team starts.
+Workers carry a team_bus MCP tool `team_message` to talk to each other by
+name; give them exact peer names when coordination is needed and prevent
+message loops. Relay short findings, not transcripts. Verify meaningful
+results yourself.
+"""
+
+[agents]
+enabled = false
+
+[mcp_servers.codex_team]
+command = "python"
+args = ["C:/path/to/codex-team/bridge.py"]
+startup_timeout_sec = 15
+default_tools_approval_mode = "auto"
